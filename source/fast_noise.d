@@ -57,14 +57,6 @@ module fast_noise;
 alias FNLfloat = float;
 //alias FNLfloat = double;
 
-
-/*
-#include <math.h>
-#include <stdint.h>
-#include <stdbool.h> 
-#include <float.h>
-*/
-
 // Enums
 enum FNLNoiseType {
     FNL_NOISE_OPENSIMPLEX2,
@@ -212,11 +204,6 @@ struct FNLState {
     float domain_warp_amp = 1.0;
 }
 
-/**
- * Creates a noise state with default values.
- * @param seed Optionally set the state seed.
- */
-FNLState fnlCreateState();
 
 /**
  * 2D noise at given position using the state settings
@@ -2309,6 +2296,11 @@ static void _fnlSingleDomainWarpOpenSimplex2Gradient(int seed, float warpAmp, fl
 // Public API
 // ====================
 
+/**
+ * Creates a noise state with default values.
+ * @param seed Optionally set the state seed.
+ */
+
 FNLState fnlCreateState()
 {
     FNLState newState;
@@ -2329,7 +2321,7 @@ FNLState fnlCreateState()
     newState.domain_warp_type = FNLDomainWarpType.FNL_DOMAIN_WARP_OPENSIMPLEX2;
     return newState;
 }
-
+// Overload which intakes a seed
 FNLState fnlCreateState(int seed)
 {
     FNLState newState;
