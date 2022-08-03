@@ -502,19 +502,6 @@ static pragma(inline) void _fnlGradCoordDual3D(int seed, int xPrimed, int yPrime
 
 // Generic Noise Gen
 
-static float _fnlSingleSimplex2D(int seed, FNLfloat x, FNLfloat y);
-static float _fnlSingleOpenSimplex23D(int seed, FNLfloat x, FNLfloat y, FNLfloat z);
-static float _fnlSingleOpenSimplex2S2D(int seed, FNLfloat x, FNLfloat y);
-static float _fnlSingleOpenSimplex2S3D(int seed, FNLfloat x, FNLfloat y, FNLfloat z);
-static float _fnlSingleCellular2D(FNLState *state, int seed, FNLfloat x, FNLfloat y);
-static float _fnlSingleCellular3D(FNLState *state, int seed, FNLfloat x, FNLfloat y, FNLfloat z);
-static float _fnlSinglePerlin2D(int seed, FNLfloat x, FNLfloat y);
-static float _fnlSinglePerlin3D(int seed, FNLfloat x, FNLfloat y, FNLfloat z);
-static float _fnlSingleValueCubic2D(int seed, FNLfloat x, FNLfloat y);
-static float _fnlSingleValueCubic3D(int seed, FNLfloat x, FNLfloat y, FNLfloat z);
-static float _fnlSingleValue2D(int seed, FNLfloat x, FNLfloat y);
-static float _fnlSingleValue3D(int seed, FNLfloat x, FNLfloat y, FNLfloat z);
-
 static float _fnlGenNoiseSingle2D(FNLState *state, int seed, FNLfloat x, FNLfloat y)
 {
     switch (state.noise_type)
