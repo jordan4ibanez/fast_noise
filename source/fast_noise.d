@@ -54,8 +54,9 @@ module fast_noise;
 
 
 // Switch between using floats or doubles for input position
-//Typedef(float) FNLfloat;
-double FNLfloat;
+alias FNLfloat = Typedef!float;
+//alias FNLfloat = Typedef!double;
+
 
 /*
 #include <math.h>
@@ -639,7 +640,7 @@ static void _fnlTransformNoiseCoordinate2D(fnl_state *state, FNLfloat *x, FNLflo
     case FNL_NOISE_OPENSIMPLEX2:
     case FNL_NOISE_OPENSIMPLEX2S:
     {
-        const FNLfloat SQRT3 = (FNLfloat)1.7320508075688772935274463415059;
+        const FNLfloat SQRT3 = cast(FNLfloat)1.7320508075688772935274463415059;
         const FNLfloat F2 = 0.5f * (SQRT3 - 1);
         FNLfloat t = (*x + *y) * F2;
         *x += t;
