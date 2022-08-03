@@ -450,10 +450,11 @@ static  pragma(inline) float _fnlPingPong(float t)
 
 static float _fnlCalculateFractalBounding(fnl_state *state)
 {
-    float gain = _fnlFastAbs(state->gain);
+
+    float gain = _fnlFastAbs(state.gain);
     float amp = gain;
     float ampFractal = 1.0f;
-    for (int i = 1; i < state->octaves; i++)
+    for (int i = 1; i < state.octaves; i++)
     {
         ampFractal += amp;
         amp *= gain;
@@ -467,7 +468,7 @@ static const int PRIME_X = 501125321;
 static const int PRIME_Y = 1136930381;
 static const int PRIME_Z = 1720413743;
 
-static inline int _fnlHash2D(int seed, int xPrimed, int yPrimed)
+static pragma(inline) int _fnlHash2D(int seed, int xPrimed, int yPrimed)
 {
     int hash = seed ^ xPrimed ^ yPrimed;
 
@@ -475,7 +476,7 @@ static inline int _fnlHash2D(int seed, int xPrimed, int yPrimed)
     return hash;
 }
 
-static inline int _fnlHash3D(int seed, int xPrimed, int yPrimed, int zPrimed)
+static pragma(inline) int _fnlHash3D(int seed, int xPrimed, int yPrimed, int zPrimed)
 {
     int hash = seed ^ xPrimed ^ yPrimed ^ zPrimed;
 
@@ -483,7 +484,7 @@ static inline int _fnlHash3D(int seed, int xPrimed, int yPrimed, int zPrimed)
     return hash;
 }
 
-static inline float _fnlValCoord2D(int seed, int xPrimed, int yPrimed)
+static pragma(inline) float _fnlValCoord2D(int seed, int xPrimed, int yPrimed)
 {
     int hash = _fnlHash2D(seed, xPrimed, yPrimed);
     hash *= hash;
@@ -491,7 +492,7 @@ static inline float _fnlValCoord2D(int seed, int xPrimed, int yPrimed)
     return hash * (1 / 2147483648.0f);
 }
 
-static inline float _fnlValCoord3D(int seed, int xPrimed, int yPrimed, int zPrimed)
+static pragma(inline) float _fnlValCoord3D(int seed, int xPrimed, int yPrimed, int zPrimed)
 {
     int hash = _fnlHash3D(seed, xPrimed, yPrimed, zPrimed);
     hash *= hash;
@@ -499,7 +500,7 @@ static inline float _fnlValCoord3D(int seed, int xPrimed, int yPrimed, int zPrim
     return hash * (1 / 2147483648.0f);
 }
 
-static inline float _fnlGradCoord2D(int seed, int xPrimed, int yPrimed, float xd, float yd)
+static pragma(inline) float _fnlGradCoord2D(int seed, int xPrimed, int yPrimed, float xd, float yd)
 {
     int hash = _fnlHash2D(seed, xPrimed, yPrimed);
     hash ^= hash >> 15;
@@ -507,7 +508,7 @@ static inline float _fnlGradCoord2D(int seed, int xPrimed, int yPrimed, float xd
     return xd * GRADIENTS_2D[hash] + yd * GRADIENTS_2D[hash | 1];
 }
 
-static inline float _fnlGradCoord3D(int seed, int xPrimed, int yPrimed, int zPrimed, float xd, float yd, float zd)
+static pragma(inline) float _fnlGradCoord3D(int seed, int xPrimed, int yPrimed, int zPrimed, float xd, float yd, float zd)
 {
     int hash = _fnlHash3D(seed, xPrimed, yPrimed, zPrimed);
     hash ^= hash >> 15;
@@ -515,7 +516,7 @@ static inline float _fnlGradCoord3D(int seed, int xPrimed, int yPrimed, int zPri
     return xd * GRADIENTS_3D[hash] + yd * GRADIENTS_3D[hash | 1] + zd * GRADIENTS_3D[hash | 2];
 }
 
-static inline void _fnlGradCoordOut2D(int seed, int xPrimed, int yPrimed, float *xo, float *yo)
+static pragma(inline) void _fnlGradCoordOut2D(int seed, int xPrimed, int yPrimed, float *xo, float *yo)
 {
     int hash = _fnlHash2D(seed, xPrimed, yPrimed) & (255 << 1);
 
@@ -523,7 +524,7 @@ static inline void _fnlGradCoordOut2D(int seed, int xPrimed, int yPrimed, float 
     *yo = RAND_VECS_2D[hash | 1];
 }
 
-static inline void _fnlGradCoordOut3D(int seed, int xPrimed, int yPrimed, int zPrimed, float *xo, float *yo, float *zo)
+static pragma(inline) void _fnlGradCoordOut3D(int seed, int xPrimed, int yPrimed, int zPrimed, float *xo, float *yo, float *zo)
 {
     int hash = _fnlHash3D(seed, xPrimed, yPrimed, zPrimed) & (255 << 2);
 
