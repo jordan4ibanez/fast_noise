@@ -2314,9 +2314,9 @@ FNLState fnlCreateState()
     FNLState newState;
     newState.seed = 1337;
     newState.frequency = 0.01f;
-    newState.noise_type = FNL_NOISE_OPENSIMPLEX2;
-    newState.rotation_type_3d = FNL_ROTATION_NONE;
-    newState.fractal_type = FNL_FRACTAL_NONE;
+    newState.noise_type = FNLNoiseType.FNL_NOISE_OPENSIMPLEX2;
+    newState.rotation_type_3d = FNLRotationType3D.FNL_ROTATION_NONE;
+    newState.fractal_type = FNLFractalType.FNL_FRACTAL_NONE;
     newState.octaves = 3;
     newState.lacunarity = 2.0f;
     newState.gain = 0.5f;
@@ -2338,11 +2338,11 @@ float fnlGetNoise2D(FNLState *state, FNLfloat x, FNLfloat y)
     {
     default:
         return _fnlGenNoiseSingle2D(state, state.seed, x, y);
-    case FNL_FRACTAL_FBM:
+    case FNLFractalType.FNL_FRACTAL_FBM:
         return _fnlGenFractalFBM2D(state, x, y);
-    case FNL_FRACTAL_RIDGED:
+    case FNLFractalType.FNL_FRACTAL_RIDGED:
         return _fnlGenFractalRidged2D(state, x, y);
-    case FNL_FRACTAL_PINGPONG:
+    case FNLFractalType.FNL_FRACTAL_PINGPONG:
         return _fnlGenFractalPingPong2D(state, x, y);
     }
 }
@@ -2356,11 +2356,11 @@ float fnlGetNoise3D(FNLState *state, FNLfloat x, FNLfloat y, FNLfloat z)
     {
     default:
         return _fnlGenNoiseSingle3D(state, state.seed, x, y, z);
-    case FNL_FRACTAL_FBM:
+    case FNLFractalType.FNL_FRACTAL_FBM:
         return _fnlGenFractalFBM3D(state, x, y, z);
-    case FNL_FRACTAL_RIDGED:
+    case FNLFractalType.FNL_FRACTAL_RIDGED:
         return _fnlGenFractalRidged3D(state, x, y, z);
-    case FNL_FRACTAL_PINGPONG:
+    case FNLFractalType.FNL_FRACTAL_PINGPONG:
         return _fnlGenFractalPingPong3D(state, x, y, z);
     }
 }
@@ -2372,10 +2372,10 @@ void fnlDomainWarp2D(FNLState *state, FNLfloat *x, FNLfloat *y)
     default:
         _fnlDomainWarpSingle2D(state, x, y);
         break;
-    case FNL_FRACTAL_DOMAIN_WARP_PROGRESSIVE:
+    case FNLFractalType.FNL_FRACTAL_DOMAIN_WARP_PROGRESSIVE:
         _fnlDomainWarpFractalProgressive2D(state, x, y);
         break;
-    case FNL_FRACTAL_DOMAIN_WARP_INDEPENDENT:
+    case FNLFractalType.FNL_FRACTAL_DOMAIN_WARP_INDEPENDENT:
         _fnlDomainWarpFractalIndependent2D(state, x, y);
         break;
     }
@@ -2388,10 +2388,10 @@ void fnlDomainWarp3D(FNLState *state, FNLfloat *x, FNLfloat *y, FNLfloat *z)
     default:
         _fnlDomainWarpSingle3D(state, x, y, z);
         break;
-    case FNL_FRACTAL_DOMAIN_WARP_PROGRESSIVE:
+    case FNLFractalType.FNL_FRACTAL_DOMAIN_WARP_PROGRESSIVE:
         _fnlDomainWarpFractalProgressive3D(state, x, y, z);
         break;
-    case FNL_FRACTAL_DOMAIN_WARP_INDEPENDENT:
+    case FNLFractalType.FNL_FRACTAL_DOMAIN_WARP_INDEPENDENT:
         _fnlDomainWarpFractalIndependent3D(state, x, y, z);
         break;
     }
