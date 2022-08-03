@@ -54,8 +54,8 @@ module fast_noise;
 
 
 // Switch between using floats or doubles for input position
-float FNLfloat;
-//typedef double FNLfloat;
+//Typedef(float) FNLfloat;
+double FNLfloat;
 
 /*
 #include <math.h>
@@ -533,7 +533,7 @@ static pragma(inline) void _fnlGradCoordOut3D(int seed, int xPrimed, int yPrimed
     *zo = RAND_VECS_3D[hash | 2];
 }
 
-static inline void _fnlGradCoordDual2D(int seed, int xPrimed, int yPrimed, float xd, float yd, float *xo, float *yo)
+static pragma(inline) void _fnlGradCoordDual2D(int seed, int xPrimed, int yPrimed, float xd, float yd, float *xo, float *yo)
 {
     int hash = _fnlHash2D(seed, xPrimed, yPrimed);
     int index1 = hash & (127 << 1);
@@ -550,7 +550,7 @@ static inline void _fnlGradCoordDual2D(int seed, int xPrimed, int yPrimed, float
     *yo = value * ygo;
 }
 
-static inline void _fnlGradCoordDual3D(int seed, int xPrimed, int yPrimed, int zPrimed, float xd, float yd, float zd, float *xo, float *yo, float *zo)
+static pragma(inline) void _fnlGradCoordDual3D(int seed, int xPrimed, int yPrimed, int zPrimed, float xd, float yd, float zd, float *xo, float *yo, float *zo)
 {
     int hash = _fnlHash3D(seed, xPrimed, yPrimed, zPrimed);
     int index1 = hash & (63 << 2);
@@ -587,7 +587,7 @@ static float _fnlSingleValue3D(int seed, FNLfloat x, FNLfloat y, FNLfloat z);
 
 static float _fnlGenNoiseSingle2D(fnl_state *state, int seed, FNLfloat x, FNLfloat y)
 {
-    switch (state->noise_type)
+    switch (state.noise_type)
     {
     case FNL_NOISE_OPENSIMPLEX2:
         return _fnlSingleSimplex2D(seed, x, y);
@@ -608,7 +608,7 @@ static float _fnlGenNoiseSingle2D(fnl_state *state, int seed, FNLfloat x, FNLflo
 
 static float _fnlGenNoiseSingle3D(fnl_state *state, int seed, FNLfloat x, FNLfloat y, FNLfloat z)
 {
-    switch (state->noise_type)
+    switch (state.noise_type)
     {
     case FNL_NOISE_OPENSIMPLEX2:
         return _fnlSingleOpenSimplex23D(seed, x, y, z);
@@ -631,10 +631,10 @@ static float _fnlGenNoiseSingle3D(fnl_state *state, int seed, FNLfloat x, FNLflo
 
 static void _fnlTransformNoiseCoordinate2D(fnl_state *state, FNLfloat *x, FNLfloat *y)
 {
-    *x *= state->frequency;
-    *y *= state->frequency;
+    *x *= state.frequency;
+    *y *= state.frequency;
 
-    switch (state->noise_type)
+    switch (state.noise_type)
     {
     case FNL_NOISE_OPENSIMPLEX2:
     case FNL_NOISE_OPENSIMPLEX2S:
