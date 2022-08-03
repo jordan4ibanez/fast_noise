@@ -1,0 +1,9 @@
+{
+	"authors": [
+		"jordan4ibanez"
+	],
+	"copyright": "Copyright © 2022, jordan4ibanez",
+	"description": "A Fast Portable Noise Library",
+	"license": "MIT",
+	"name": "fast_noise"
+}

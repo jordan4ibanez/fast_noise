@@ -1,0 +1,15 @@
+.dub
+docs.json
+__dummy.html
+docs/
+/fast_noise
+fast_noise.so
+fast_noise.dylib
+fast_noise.dll
+fast_noise.a
+fast_noise.lib
+fast_noise-test-*
+*.exe
+*.o
+*.obj
+*.lst
