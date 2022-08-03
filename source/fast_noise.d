@@ -206,11 +206,6 @@ struct FNLState {
 
 
 
-/**
- * 3D noise at given position using the state settings
- * @returns Noise output bounded between -1 and 1.
- */
-float fnlGetNoise3D(FNLState *state, FNLfloat x, FNLfloat y, FNLfloat z);
 
 /**
  * 2D warps the input position using current domain warp settings.
@@ -2359,6 +2354,10 @@ float fnlGetNoise2D(FNLState *state, FNLfloat x, FNLfloat y)
     }
 }
 
+/**
+ * 3D noise at given position using the state settings
+ * @returns Noise output bounded between -1 and 1.
+ */
 float fnlGetNoise3D(FNLState *state, FNLfloat x, FNLfloat y, FNLfloat z)
 {
     _fnlTransformNoiseCoordinate3D(state, &x, &y, &z);
