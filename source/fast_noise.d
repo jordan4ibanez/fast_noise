@@ -255,8 +255,6 @@ void fnlDomainWarp3D(fnl_state *state, FNLfloat *x, FNLfloat *y, FNLfloat *z);
 // Below this line is the implementation
 // ====================
 
-#if defined(FNL_IMPL)
-
 // Constants
 
 static const float GRADIENTS_2D[] = 
@@ -389,13 +387,13 @@ static const float RAND_VECS_3D[] =
 
 // Utilities
 
-static inline float _fnlFastMin(float x, float y) { return x < y ? x : y; }
+static pragma(inline) float _fnlFastMin(float x, float y) { return x < y ? x : y; }
 
-static inline float _fnlFastMax(float x, float y) { return x > y ? x : y; }
+static pragma(inline) float _fnlFastMax(float x, float y) { return x > y ? x : y; }
 
-static inline float _fnlFastAbs(float f) { return f < 0 ? -f : f; }
+static pragma(inline) float _fnlFastAbs(float f) { return f < 0 ? -f : f; }
 
-static inline float _fnlCasti32Tof32(int i)
+static pragma(inline) float _fnlCasti32Tof32(int i)
 {
     union
     {
@@ -406,7 +404,7 @@ static inline float _fnlCasti32Tof32(int i)
     return u.f;
 }
 
-static inline int _fnlCastf32Toi32(float f)
+static pragma(inline) int _fnlCastf32Toi32(float f)
 {
     union
     {
@@ -417,7 +415,7 @@ static inline int _fnlCastf32Toi32(float f)
     return u.i;
 }
 
-static inline float _fnlInvSqrt(float a)
+static pragma(inline) float _fnlInvSqrt(float a)
 {
     float xhalf = 0.5f * a;
     a = _fnlCasti32Tof32(0x5f3759df - (_fnlCastf32Toi32(a) >> 1));
