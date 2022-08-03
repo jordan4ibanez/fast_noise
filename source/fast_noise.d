@@ -569,17 +569,17 @@ static float _fnlGenNoiseSingle2D(FNLState *state, int seed, FNLfloat x, FNLfloa
 {
     switch (state.noise_type)
     {
-    case FNL_NOISE_OPENSIMPLEX2:
+    case FNLNoiseType.FNL_NOISE_OPENSIMPLEX2:
         return _fnlSingleSimplex2D(seed, x, y);
-    case FNL_NOISE_OPENSIMPLEX2S:
+    case FNLNoiseType.FNL_NOISE_OPENSIMPLEX2S:
         return _fnlSingleOpenSimplex2S2D(seed, x, y);
-    case FNL_NOISE_CELLULAR:
+    case FNLNoiseType.FNL_NOISE_CELLULAR:
         return _fnlSingleCellular2D(state, seed, x, y);
-    case FNL_NOISE_PERLIN:
+    case FNLNoiseType.FNL_NOISE_PERLIN:
         return _fnlSinglePerlin2D(seed, x, y);
-    case FNL_NOISE_VALUE_CUBIC:
+    case FNLNoiseType.FNL_NOISE_VALUE_CUBIC:
         return _fnlSingleValueCubic2D(seed, x, y);
-    case FNL_NOISE_VALUE:
+    case FNLNoiseType.FNL_NOISE_VALUE:
         return _fnlSingleValue2D(seed, x, y);
     default:
         return 0;
@@ -590,17 +590,17 @@ static float _fnlGenNoiseSingle3D(FNLState *state, int seed, FNLfloat x, FNLfloa
 {
     switch (state.noise_type)
     {
-    case FNL_NOISE_OPENSIMPLEX2:
+    case FNLNoiseType.FNL_NOISE_OPENSIMPLEX2:
         return _fnlSingleOpenSimplex23D(seed, x, y, z);
-    case FNL_NOISE_OPENSIMPLEX2S:
+    case FNLNoiseType.FNL_NOISE_OPENSIMPLEX2S:
         return _fnlSingleOpenSimplex2S3D(seed, x, y, z);
-    case FNL_NOISE_CELLULAR:
+    case FNLNoiseType.FNL_NOISE_CELLULAR:
         return _fnlSingleCellular3D(state, seed, x, y, z);
-    case FNL_NOISE_PERLIN:
+    case FNLNoiseType.FNL_NOISE_PERLIN:
         return _fnlSinglePerlin3D(seed, x, y, z);
-    case FNL_NOISE_VALUE_CUBIC:
+    case FNLNoiseType.FNL_NOISE_VALUE_CUBIC:
         return _fnlSingleValueCubic3D(seed, x, y, z);
-    case FNL_NOISE_VALUE:
+    case FNLNoiseType.FNL_NOISE_VALUE:
         return _fnlSingleValue3D(seed, x, y, z);
     default:
         return 0;
@@ -616,8 +616,8 @@ static void _fnlTransformNoiseCoordinate2D(FNLState *state, FNLfloat *x, FNLfloa
 
     switch (state.noise_type)
     {
-    case FNL_NOISE_OPENSIMPLEX2:
-    case FNL_NOISE_OPENSIMPLEX2S:
+    case FNLNoiseType.FNL_NOISE_OPENSIMPLEX2:
+    case FNLNoiseType.FNL_NOISE_OPENSIMPLEX2S:
     {
         const FNLfloat SQRT3 = cast(FNLfloat)1.7320508075688772935274463415059;
         const FNLfloat F2 = 0.5f * (SQRT3 - 1);
@@ -639,7 +639,7 @@ static void _fnlTransformNoiseCoordinate3D(FNLState *state, FNLfloat *x, FNLfloa
 
     switch (state.rotation_type_3d)
     {
-    case FNL_ROTATION_IMPROVE_XY_PLANES:
+    case FNLRotationType3D.FNL_ROTATION_IMPROVE_XY_PLANES:
     {
         FNLfloat xy = *x + *y;
         FNLfloat s2 = xy * -cast(FNLfloat)0.211324865405187;
@@ -649,7 +649,7 @@ static void _fnlTransformNoiseCoordinate3D(FNLState *state, FNLfloat *x, FNLfloa
         *z += xy * cast(FNLfloat)0.577350269189626;
     }
     break;
-    case FNL_ROTATION_IMPROVE_XZ_PLANES:
+    case FNLRotationType3D.FNL_ROTATION_IMPROVE_XZ_PLANES:
     {
         FNLfloat xz = *x + *z;
         FNLfloat s2 = xz * -cast(FNLfloat)0.211324865405187;
@@ -662,8 +662,8 @@ static void _fnlTransformNoiseCoordinate3D(FNLState *state, FNLfloat *x, FNLfloa
     default:
         switch (state.noise_type)
         {
-        case FNL_NOISE_OPENSIMPLEX2:
-        case FNL_NOISE_OPENSIMPLEX2S:
+        case FNLNoiseType.FNL_NOISE_OPENSIMPLEX2:
+        case FNLNoiseType.FNL_NOISE_OPENSIMPLEX2S:
         {
             const FNLfloat R3 = cast(FNLfloat)(2.0 / 3.0);
             FNLfloat r = (*x + *y + *z) * R3; // Rotation, not skew
@@ -684,8 +684,8 @@ static void _fnlTransformDomainWarpCoordinate2D(FNLState *state, FNLfloat *x, FN
 {
     switch (state.domain_warp_type)
     {
-    case FNL_DOMAIN_WARP_OPENSIMPLEX2:
-    case FNL_DOMAIN_WARP_OPENSIMPLEX2_REDUCED:
+    case FNLDomainWarpType.FNL_DOMAIN_WARP_OPENSIMPLEX2:
+    case FNLDomainWarpType.FNL_DOMAIN_WARP_OPENSIMPLEX2_REDUCED:
     {
         const FNLfloat SQRT3 = cast(FNLfloat)1.7320508075688772935274463415059;
         const FNLfloat F2 = 0.5f * (SQRT3 - 1);
@@ -703,7 +703,7 @@ static void _fnlTransformDomainWarpCoordinate3D(FNLState *state, FNLfloat *x, FN
 {
     switch (state.rotation_type_3d)
     {
-    case FNL_ROTATION_IMPROVE_XY_PLANES:
+    case FNLRotationType3D.FNL_ROTATION_IMPROVE_XY_PLANES:
     {
         FNLfloat xy = *x + *y;
         FNLfloat s2 = xy * -cast(FNLfloat)0.211324865405187;
@@ -713,7 +713,7 @@ static void _fnlTransformDomainWarpCoordinate3D(FNLState *state, FNLfloat *x, FN
         *z += xy * cast(FNLfloat)0.577350269189626;
     }
     break;
-    case FNL_ROTATION_IMPROVE_XZ_PLANES:
+    case FNLRotationType3D.FNL_ROTATION_IMPROVE_XZ_PLANES:
     {
         FNLfloat xz = *x + *z;
         FNLfloat s2 = xz * -cast(FNLfloat)0.211324865405187;
@@ -726,8 +726,8 @@ static void _fnlTransformDomainWarpCoordinate3D(FNLState *state, FNLfloat *x, FN
     default:
         switch (state.domain_warp_type)
         {
-        case FNL_DOMAIN_WARP_OPENSIMPLEX2:
-        case FNL_DOMAIN_WARP_OPENSIMPLEX2_REDUCED:
+        case FNLDomainWarpType.FNL_DOMAIN_WARP_OPENSIMPLEX2:
+        case FNLDomainWarpType.FNL_DOMAIN_WARP_OPENSIMPLEX2_REDUCED:
         {
             const FNLfloat R3 = cast(FNLfloat)(2.0 / 3.0);
             FNLfloat r = (*x + *y + *z) * R3; // Rotation, not skew
@@ -1850,13 +1850,13 @@ static pragma(inline) void _fnlDoSingleDomainWarp2D(FNLState *state, int seed, f
 {
     switch (state.domain_warp_type)
     {
-    case FNL_DOMAIN_WARP_OPENSIMPLEX2:
+    case FNLDomainWarpType.FNL_DOMAIN_WARP_OPENSIMPLEX2:
         _fnlSingleDomainWarpSimplexGradient(seed, amp * 38.283687591552734375f, freq, x, y, xp, yp, false);
         break;
-    case FNL_DOMAIN_WARP_OPENSIMPLEX2_REDUCED:
+    case FNLDomainWarpType.FNL_DOMAIN_WARP_OPENSIMPLEX2_REDUCED:
         _fnlSingleDomainWarpSimplexGradient(seed, amp * 16.0f, freq, x, y, xp, yp, true);
         break;
-    case FNL_DOMAIN_WARP_BASICGRID:
+    case FNLDomainWarpType.FNL_DOMAIN_WARP_BASICGRID:
         _fnlSingleDomainWarpBasicGrid2D(seed, amp, freq, x, y, xp, yp);
         break;
     }
@@ -1866,13 +1866,13 @@ static pragma(inline) void _fnlDoSingleDomainWarp3D(FNLState *state, int seed, f
 {
     switch (state.domain_warp_type)
     {
-    case FNL_DOMAIN_WARP_OPENSIMPLEX2:
+    case FNLDomainWarpType.FNL_DOMAIN_WARP_OPENSIMPLEX2:
         _fnlSingleDomainWarpOpenSimplex2Gradient(seed, amp * 32.69428253173828125f, freq, x, y, z, xp, yp, zp, false);
         break;
-    case FNL_DOMAIN_WARP_OPENSIMPLEX2_REDUCED:
+    case FNLDomainWarpType.FNL_DOMAIN_WARP_OPENSIMPLEX2_REDUCED:
         _fnlSingleDomainWarpOpenSimplex2Gradient(seed, amp * 7.71604938271605f, freq, x, y, z, xp, yp, zp, true);
         break;
-    case FNL_DOMAIN_WARP_BASICGRID:
+    case FNLDomainWarpType.FNL_DOMAIN_WARP_BASICGRID:
         _fnlSingleDomainWarpBasicGrid3D(seed, amp, freq, x, y, z, xp, yp, zp);
         break;
     }
@@ -2324,7 +2324,7 @@ FNLState fnlCreateState()
     newState.cellular_return_type = FNL_CELLULAR_RETURN_VALUE_DISTANCE;
     newState.cellular_jitter_mod = 1.0f;
     newState.domain_warp_amp = 30.0f;
-    newState.domain_warp_type = FNL_DOMAIN_WARP_OPENSIMPLEX2;
+    newState.domain_warp_type = FNLDomainWarpType.FNL_DOMAIN_WARP_OPENSIMPLEX2;
     return newState;
 }
 
