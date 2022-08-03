@@ -1375,8 +1375,8 @@ static float _fnlSingleCellular2D(FNLState *state, int seed, FNLfloat x, FNLfloa
     int xr = _fnlFastRound(x);
     int yr = _fnlFastRound(y);
 
-    float distance0 = FLT_MAX;
-    float distance1 = FLT_MAX;
+    float distance0 = float.max;
+    float distance1 = float.max;
     int closestHash = 0;
 
     float cellularJitter = 0.5f * state.cellular_jitter_mod;
@@ -1501,8 +1501,8 @@ static float _fnlSingleCellular3D(FNLState *state, int seed, FNLfloat x, FNLfloa
     int yr = _fnlFastRound(y);
     int zr = _fnlFastRound(z);
 
-    float distance0 = FLT_MAX;
-    float distance1 = FLT_MAX;
+    float distance0 = float.max;
+    float distance1 = float.max;
     int closestHash = 0;
 
     float cellularJitter = 0.39614353f * state.cellular_jitter_mod;
