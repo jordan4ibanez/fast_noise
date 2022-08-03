@@ -258,6 +258,7 @@ void fnlDomainWarp3D(FNLState *state, FNLfloat *x, FNLfloat *y, FNLfloat *z);
 
 // Constants
 
+// This is going to stay yellow, way too many to fix
 static const float GRADIENTS_2D[] = 
 {
     0.130526192220052f, 0.99144486137381f, 0.38268343236509f, 0.923879532511287f, 0.608761429008721f, 0.793353340291235f, 0.793353340291235f, 0.608761429008721f,
