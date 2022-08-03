@@ -1,5 +1,7 @@
 # fast_noise_d
- Fast Portable Noise Library. Translated to D
+ Fast Portable Noise Library. Translated to D.
+
+ You can see the original C file here: https://github.com/Auburn/FastNoiseLite/blob/master/C/FastNoiseLite.h
 
 ## A small example on how to use the library:
 
