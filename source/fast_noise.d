@@ -1859,6 +1859,7 @@ static pragma(inline) void _fnlDoSingleDomainWarp2D(FNLState *state, int seed, f
     case FNLDomainWarpType.FNL_DOMAIN_WARP_BASICGRID:
         _fnlSingleDomainWarpBasicGrid2D(seed, amp, freq, x, y, xp, yp);
         break;
+    default:
     }
 }
 
@@ -1875,6 +1876,7 @@ static pragma(inline) void _fnlDoSingleDomainWarp3D(FNLState *state, int seed, f
     case FNLDomainWarpType.FNL_DOMAIN_WARP_BASICGRID:
         _fnlSingleDomainWarpBasicGrid3D(seed, amp, freq, x, y, z, xp, yp, zp);
         break;
+    default:
     }
 }
 
