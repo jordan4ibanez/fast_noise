@@ -654,34 +654,34 @@ static void _fnlTransformNoiseCoordinate2D(fnl_state *state, FNLfloat *x, FNLflo
 
 static void _fnlTransformNoiseCoordinate3D(fnl_state *state, FNLfloat *x, FNLfloat *y, FNLfloat *z)
 {
-    *x *= state->frequency;
-    *y *= state->frequency;
-    *z *= state->frequency;
+    *x *= state.frequency;
+    *y *= state.frequency;
+    *z *= state.frequency;
 
-    switch (state->rotation_type_3d)
+    switch (state.rotation_type_3d)
     {
     case FNL_ROTATION_IMPROVE_XY_PLANES:
     {
         FNLfloat xy = *x + *y;
-        FNLfloat s2 = xy * -(FNLfloat)0.211324865405187;
-        *z *= (FNLfloat)0.577350269189626;
+        FNLfloat s2 = xy * -cast(FNLfloat)0.211324865405187;
+        *z *= cast(FNLfloat)0.577350269189626;
         *x += s2 - *z;
         *y = *y + s2 - *z;
-        *z += xy * (FNLfloat)0.577350269189626;
+        *z += xy * cast(FNLfloat)0.577350269189626;
     }
     break;
     case FNL_ROTATION_IMPROVE_XZ_PLANES:
     {
         FNLfloat xz = *x + *z;
-        FNLfloat s2 = xz * -(FNLfloat)0.211324865405187;
-        *y *= (FNLfloat)0.577350269189626;
+        FNLfloat s2 = xz * -cast(FNLfloat)0.211324865405187;
+        *y *= cast(FNLfloat)0.577350269189626;
         *x += s2 - *y;
         *z += s2 - *y;
-        *y += xz * (FNLfloat)0.577350269189626;
+        *y += xz * cast(FNLfloat)0.577350269189626;
     }
     break;
     default:
-        switch (state->noise_type)
+        switch (state.noise_type)
         {
         case FNL_NOISE_OPENSIMPLEX2:
         case FNL_NOISE_OPENSIMPLEX2S:
@@ -703,12 +703,12 @@ static void _fnlTransformNoiseCoordinate3D(fnl_state *state, FNLfloat *x, FNLflo
 
 static void _fnlTransformDomainWarpCoordinate2D(fnl_state *state, FNLfloat *x, FNLfloat *y)
 {
-    switch (state->domain_warp_type)
+    switch (state.domain_warp_type)
     {
     case FNL_DOMAIN_WARP_OPENSIMPLEX2:
     case FNL_DOMAIN_WARP_OPENSIMPLEX2_REDUCED:
     {
-        const FNLfloat SQRT3 = (FNLfloat)1.7320508075688772935274463415059;
+        const FNLfloat SQRT3 = cast(FNLfloat)1.7320508075688772935274463415059;
         const FNLfloat F2 = 0.5f * (SQRT3 - 1);
         FNLfloat t = (*x + *y) * F2;
         *x += t;
@@ -722,30 +722,30 @@ static void _fnlTransformDomainWarpCoordinate2D(fnl_state *state, FNLfloat *x, F
 
 static void _fnlTransformDomainWarpCoordinate3D(fnl_state *state, FNLfloat *x, FNLfloat *y, FNLfloat *z)
 {
-    switch (state->rotation_type_3d)
+    switch (state.rotation_type_3d)
     {
     case FNL_ROTATION_IMPROVE_XY_PLANES:
     {
         FNLfloat xy = *x + *y;
-        FNLfloat s2 = xy * -(FNLfloat)0.211324865405187;
-        *z *= (FNLfloat)0.577350269189626;
+        FNLfloat s2 = xy * -cast(FNLfloat)0.211324865405187;
+        *z *= cast(FNLfloat)0.577350269189626;
         *x += s2 - *z;
         *y = *y + s2 - *z;
-        *z += xy * (FNLfloat)0.577350269189626;
+        *z += xy * cast(FNLfloat)0.577350269189626;
     }
     break;
     case FNL_ROTATION_IMPROVE_XZ_PLANES:
     {
         FNLfloat xz = *x + *z;
-        FNLfloat s2 = xz * -(FNLfloat)0.211324865405187;
-        *y *= (FNLfloat)0.577350269189626;
+        FNLfloat s2 = xz * -cast(FNLfloat)0.211324865405187;
+        *y *= cast(FNLfloat)0.577350269189626;
         *x += s2 - *y;
         *z += s2 - *y;
-        *y += xz * (FNLfloat)0.577350269189626;
+        *y += xz * cast(FNLfloat)0.577350269189626;
     }
     break;
     default:
-        switch (state->domain_warp_type)
+        switch (state.domain_warp_type)
         {
         case FNL_DOMAIN_WARP_OPENSIMPLEX2:
         case FNL_DOMAIN_WARP_OPENSIMPLEX2_REDUCED:
