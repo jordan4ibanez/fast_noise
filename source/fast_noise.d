@@ -206,18 +206,6 @@ struct FNLState {
 
 
 
-
-/**
- * 2D warps the input position using current domain warp settings.
- * 
- * Example usage with fnlGetNoise2D:
- * ```
- * fnlDomainWarp2D(&state, &x, &y);
- * noise = fnlGetNoise2D(&state, x, y);
- * ```
- */
-void fnlDomainWarp2D(FNLState *state, FNLfloat *x, FNLfloat *y);
-
 /**
  * 3D warps the input position using current domain warp settings.
  * 
@@ -2376,6 +2364,15 @@ float fnlGetNoise3D(FNLState *state, FNLfloat x, FNLfloat y, FNLfloat z)
     }
 }
 
+/**
+ * 2D warps the input position using current domain warp settings.
+ * 
+ * Example usage with fnlGetNoise2D:
+ * ```
+ * fnlDomainWarp2D(&state, &x, &y);
+ * noise = fnlGetNoise2D(&state, x, y);
+ * ```
+ */
 void fnlDomainWarp2D(FNLState *state, FNLfloat *x, FNLfloat *y)
 {
     switch (state.fractal_type)
