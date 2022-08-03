@@ -1792,12 +1792,6 @@ static float _fnlSingleValue3D(int seed, FNLfloat x, FNLfloat y, FNLfloat z)
 
 // Domain Warp
 
-// Forward declare
-static void _fnlSingleDomainWarpBasicGrid2D(int seed, float warpAmp, float frequency, FNLfloat x, FNLfloat y, FNLfloat *xp, FNLfloat *yp);
-static void _fnlSingleDomainWarpBasicGrid3D(int seed, float warpAmp, float frequency, FNLfloat x, FNLfloat y, FNLfloat z, FNLfloat *xp, FNLfloat *yp, FNLfloat *zp);
-static void _fnlSingleDomainWarpSimplexGradient(int seed, float warpAmp, float frequency, FNLfloat x, FNLfloat y, FNLfloat *xr, FNLfloat *yr, bool outGradOnly);
-static void _fnlSingleDomainWarpOpenSimplex2Gradient(int seed, float warpAmp, float frequency, FNLfloat x, FNLfloat y, FNLfloat z, FNLfloat *xr, FNLfloat *yr, FNLfloat *zr, bool outGradOnly);
-
 static pragma(inline) void _fnlDoSingleDomainWarp2D(FNLState *state, int seed, float amp, float freq, FNLfloat x, FNLfloat y, FNLfloat *xp, FNLfloat *yp)
 {
     switch (state.domain_warp_type)
