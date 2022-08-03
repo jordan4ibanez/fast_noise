@@ -205,11 +205,6 @@ struct FNLState {
 }
 
 
-/**
- * 2D noise at given position using the state settings
- * @returns Noise output bounded between -1 and 1.
- */
-float fnlGetNoise2D(FNLState *state, FNLfloat x, FNLfloat y);
 
 /**
  * 3D noise at given position using the state settings
@@ -2343,6 +2338,10 @@ FNLState fnlCreateState(int seed)
     return newState;
 }
 
+/**
+ * 2D noise at given position using the state settings
+ * @returns Noise output bounded between -1 and 1.
+ */
 float fnlGetNoise2D(FNLState *state, FNLfloat x, FNLfloat y)
 {
     _fnlTransformNoiseCoordinate2D(state, &x, &y);
