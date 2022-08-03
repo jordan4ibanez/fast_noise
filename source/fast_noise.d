@@ -2330,6 +2330,27 @@ FNLState fnlCreateState()
     return newState;
 }
 
+FNLState fnlCreateState(int seed)
+{
+    FNLState newState;
+    newState.seed = seed;
+    newState.frequency = 0.01f;
+    newState.noise_type = FNLNoiseType.FNL_NOISE_OPENSIMPLEX2;
+    newState.rotation_type_3d = FNLRotationType3D.FNL_ROTATION_NONE;
+    newState.fractal_type = FNLFractalType.FNL_FRACTAL_NONE;
+    newState.octaves = 3;
+    newState.lacunarity = 2.0f;
+    newState.gain = 0.5f;
+    newState.weighted_strength = 0.0f;
+    newState.ping_pong_strength = 2.0f;
+    newState.cellular_distance_func = FNLCellularDistanceFunc.FNL_CELLULAR_DISTANCE_EUCLIDEANSQ;
+    newState.cellular_return_type = FNLCellularReturnType.FNL_CELLULAR_RETURN_VALUE_DISTANCE;
+    newState.cellular_jitter_mod = 1.0f;
+    newState.domain_warp_amp = 30.0f;
+    newState.domain_warp_type = FNLDomainWarpType.FNL_DOMAIN_WARP_OPENSIMPLEX2;
+    return newState;
+}
+
 float fnlGetNoise2D(FNLState *state, FNLfloat x, FNLfloat y)
 {
     _fnlTransformNoiseCoordinate2D(state, &x, &y);
