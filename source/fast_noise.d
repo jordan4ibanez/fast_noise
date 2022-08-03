@@ -4,6 +4,7 @@ module fast_noise;
 //
 // Copyright(c) 2020 Jordan Peck (jordan.me2@gmail.com)
 // Copyright(c) 2020 Contributors
+// Translated to D by jordan4ibanez
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files(the "Software"), to deal
@@ -51,60 +52,51 @@ module fast_noise;
 
 // In *one* C or C++ file, use #define FNL_IMPL to generate implementation
 
-#ifndef FASTNOISELITE_H
-#define FASTNOISELITE_H
 
 // Switch between using floats or doubles for input position
-typedef float FNLfloat;
+float FNLfloat;
 //typedef double FNLfloat;
 
-#if defined(__cplusplus)
-extern "C" {
-#endif
-
+/*
 #include <math.h>
 #include <stdint.h>
 #include <stdbool.h> 
 #include <float.h>
+*/
 
 // Enums
-typedef enum
-{
+enum fnl_noise_type {
     FNL_NOISE_OPENSIMPLEX2,
     FNL_NOISE_OPENSIMPLEX2S,
     FNL_NOISE_CELLULAR,
     FNL_NOISE_PERLIN,
     FNL_NOISE_VALUE_CUBIC,
     FNL_NOISE_VALUE
-} fnl_noise_type;
+}
 
-typedef enum
-{
+enum fnl_rotation_type_3d {
     FNL_ROTATION_NONE,
     FNL_ROTATION_IMPROVE_XY_PLANES,
     FNL_ROTATION_IMPROVE_XZ_PLANES
-} fnl_rotation_type_3d;
+}
 
-typedef enum
-{
+enum fnl_fractal_type {
     FNL_FRACTAL_NONE,
     FNL_FRACTAL_FBM,
     FNL_FRACTAL_RIDGED,
     FNL_FRACTAL_PINGPONG,
     FNL_FRACTAL_DOMAIN_WARP_PROGRESSIVE,
     FNL_FRACTAL_DOMAIN_WARP_INDEPENDENT
-} fnl_fractal_type;
+}
 
-typedef enum
-{
+enum fnl_cellular_distance_func {
     FNL_CELLULAR_DISTANCE_EUCLIDEAN,
     FNL_CELLULAR_DISTANCE_EUCLIDEANSQ,
     FNL_CELLULAR_DISTANCE_MANHATTAN,
     FNL_CELLULAR_DISTANCE_HYBRID
-} fnl_cellular_distance_func;
+}
 
-typedef enum
-{
+enum fnl_cellular_return_type {
     FNL_CELLULAR_RETURN_VALUE_CELLVALUE,
     FNL_CELLULAR_RETURN_VALUE_DISTANCE,
     FNL_CELLULAR_RETURN_VALUE_DISTANCE2,
@@ -112,21 +104,19 @@ typedef enum
     FNL_CELLULAR_RETURN_VALUE_DISTANCE2SUB,
     FNL_CELLULAR_RETURN_VALUE_DISTANCE2MUL,
     FNL_CELLULAR_RETURN_VALUE_DISTANCE2DIV,
-} fnl_cellular_return_type;
+}
 
-typedef enum
-{
+enum fnl_domain_warp_type {
     FNL_DOMAIN_WARP_OPENSIMPLEX2,
     FNL_DOMAIN_WARP_OPENSIMPLEX2_REDUCED,
     FNL_DOMAIN_WARP_BASICGRID
-} fnl_domain_warp_type;
+}
 
 /**
  * Structure containing entire noise system state.
  * @note Must only be created using fnlCreateState(optional: seed). To ensure defaults are set.
  */
-typedef struct fnl_state
-{
+struct fnl_state {
     /**
      * Seed used for all noise types.
      * @remark Default: 1337
@@ -219,7 +209,7 @@ typedef struct fnl_state
      * @remark Default: 1.0
      */
     float domain_warp_amp;
-} fnl_state;
+}
 
 /**
  * Creates a noise state with default values.
