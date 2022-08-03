@@ -424,27 +424,27 @@ static pragma(inline) float _fnlInvSqrt(float a)
 }
 
 // NOTE: If your language does not support this method (seen above), then simply use the native sqrt function.
-static inline float _fnlFastSqrt(float a) { return a * _fnlInvSqrt(a); }
+static pragma(inline) float _fnlFastSqrt(float a) { return a * _fnlInvSqrt(a); }
 
-static inline int _fnlFastFloor(FNLfloat f) { return (f >= 0 ? (int)f : (int)f - 1); }
+static pragma(inline) int _fnlFastFloor(FNLfloat f) { return (f >= 0 ? cast(int)f : cast(int)f - 1); }
 
-static inline int _fnlFastRound(FNLfloat f) { return (f >= 0) ? (int)(f + 0.5f) : (int)(f - 0.5f); }
+static pragma(inline) int _fnlFastRound(FNLfloat f) { return (f >= 0) ? cast(int)(f + 0.5f) : cast(int)(f - 0.5f); }
 
-static inline float _fnlLerp(float a, float b, float t) { return a + t * (b - a); }
+static pragma(inline) float _fnlLerp(float a, float b, float t) { return a + t * (b - a); }
 
-static inline float _fnlInterpHermite(float t) { return t * t * (3 - 2 * t); }
+static pragma(inline) float _fnlInterpHermite(float t) { return t * t * (3 - 2 * t); }
 
-static inline float _fnlInterpQuintic(float t) { return t * t * t * (t * (t * 6 - 15) + 10); }
+static pragma(inline) float _fnlInterpQuintic(float t) { return t * t * t * (t * (t * 6 - 15) + 10); }
 
-static inline float _fnlCubicLerp(float a, float b, float c, float d, float t)
+static pragma(inline) float _fnlCubicLerp(float a, float b, float c, float d, float t)
 {
     float p = (d - c) - (a - b);
     return t * t * t * p + t * t * ((a - b) - p) + t * (c - a) + b;
 }
 
-static inline float _fnlPingPong(float t)
+static  pragma(inline) float _fnlPingPong(float t)
 {
-    t -= (int)(t * 0.5f) * 2;
+    t -= cast(int)(t * 0.5f) * 2;
     return t < 1 ? t : 2 - t;
 }
 
