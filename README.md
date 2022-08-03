@@ -3,6 +3,10 @@
 
  You can see the original C file here: https://github.com/Auburn/FastNoiseLite/blob/master/C/FastNoiseLite.h
 
+ Check out the original repo here:
+
+ https://github.com/Auburn/FastNoiseLite
+
 ## A small example on how to use the library:
 
 ```d
