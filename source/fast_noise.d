@@ -122,94 +122,94 @@ struct FNLState {
      * Seed used for all noise types.
      * @remark Default: 1337
      */
-    int seed;
+    int seed = 1337;
 
     /**
      * The frequency for all noise types.
      * @remark Default: 0.01
      */
-    float frequency;
+    float frequency = 0.01;
 
     /**
      * The noise algorithm to be used by GetNoise(...).
      * @remark Default: FNL_NOISE_OPENSIMPLEX2
      */
-    FNLNoiseType noise_type;
+    FNLNoiseType noise_type = noise_type.FNL_NOISE_OPENSIMPLEX2;
 
     /**
      * Sets noise rotation type for 3D.
      * @remark Default: FNL_ROTATION_NONE
      */
-    FNLRotationType3D rotation_type_3d;
+    FNLRotationType3D rotation_type_3d = FNLRotationType3D.FNL_ROTATION_NONE;
 
     /**
      * The method used for combining octaves for all fractal noise types.
      * @remark Default: None
      * @remark FNL_FRACTAL_DOMAIN_WARP_... only effects fnlDomainWarp...
      */
-    FNLFractalType fractal_type;
+    FNLFractalType fractal_type = FNLFractalType.FNL_FRACTAL_NONE;
 
     /**
      * The octave count for all fractal noise types.
      * @remark Default: 3
      */
-    int octaves;
+    int octaves = 3;
 
     /**
      * The octave lacunarity for all fractal noise types.
      * @remark Default: 2.0
      */
-    float lacunarity;
+    float lacunarity = 2.0;
 
     /**
      * The octave gain for all fractal noise types.
      * @remark Default: 0.5
      */
-    float gain;
+    float gain = 0.5;
 
     /**
      * The octave weighting for all none Domaain Warp fractal types.
      * @remark Default: 0.0
      * @remark 
      */
-    float weighted_strength;
+    float weighted_strength = 0.0;
 
     /**
      * The strength of the fractal ping pong effect.
      * @remark Default: 2.0
      */
-    float ping_pong_strength;
+    float ping_pong_strength = 2.0;
 
     /**
      * The distance function used in cellular noise calculations.
      * @remark Default: FNL_CELLULAR_FUNC_DISTANCE
      */
-    FNLCellularDistanceFunc cellular_distance_func;
+    FNLCellularDistanceFunc cellular_distance_func = FNLCellularDistanceFunc.FNL_CELLULAR_DISTANCE_EUCLIDEAN;
 
     /**
      * The cellular return type from cellular noise calculations.
      * @remark Default: FNL_CELLULAR_RETURN_VALUE_EUCLIEANSQ
      */
-    FNLCellularReturnType cellular_return_type;
+    FNLCellularReturnType cellular_return_type = FNLCellularReturnType.FNL_CELLULAR_RETURN_VALUE_CELLVALUE;
 
     /**
      * The maximum distance a cellular point can move from it's grid position.
      * @remark Default: 1.0
      * @note Setting this higher than 1 will cause artifacts.
      */
-    float cellular_jitter_mod;
+    float cellular_jitter_mod = 1.0;
 
     /**
      * The warp algorithm when using fnlDomainWarp...
      * @remark Default: OpenSimplex2
      */
-    FNLDomainWarpType domain_warp_type;
+    FNLDomainWarpType domain_warp_type = FNLDomainWarpType.FNL_DOMAIN_WARP_OPENSIMPLEX2;
 
     /**
      * The maximum warp distance from original position when using fnlDomainWarp...
      * @remark Default: 1.0
      */
-    float domain_warp_amp;
+    float domain_warp_amp = 1.0;
 }
 
 /**
