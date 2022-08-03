@@ -55,7 +55,7 @@ module fast_noise;
 
 // Switch between using floats or doubles for input position
 alias FNLfloat = float;
-//alias FNLfloat = Typedef!double;
+//alias FNLfloat = double;
 
 
 /*
