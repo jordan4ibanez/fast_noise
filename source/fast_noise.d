@@ -909,12 +909,12 @@ static float _fnlSingleSimplex2D(int seed, FNLfloat x, FNLfloat y)
 
     int i = _fnlFastFloor(x);
     int j = _fnlFastFloor(y);
-    float xi = (float)(x - i);
-    float yi = (float)(y - j);
+    float xi = cast(float)(x - i);
+    float yi = cast(float)(y - j);
 
     float t = (xi + yi) * G2;
-    float x0 = (float)(xi - t);
-    float y0 = (float)(yi - t);
+    float x0 = cast(float)(xi - t);
+    float y0 = cast(float)(yi - t);
 
     i *= PRIME_X;
     j *= PRIME_Y;
@@ -929,20 +929,20 @@ static float _fnlSingleSimplex2D(int seed, FNLfloat x, FNLfloat y)
         n0 = (a * a) * (a * a) * _fnlGradCoord2D(seed, i, j, x0, y0);
     }
 
-    float c = (float)(2 * (1 - 2 * G2) * (1 / G2 - 2)) * t + ((float)(-2 * (1 - 2 * G2) * (1 - 2 * G2)) + a);
+    float c = cast(float)(2 * (1 - 2 * G2) * (1 / G2 - 2)) * t + (cast(float)(-2 * (1 - 2 * G2) * (1 - 2 * G2)) + a);
     if (c <= 0)
         n2 = 0;
     else
     {
-        float x2 = x0 + (2 * (float)G2 - 1);
-        float y2 = y0 + (2 * (float)G2 - 1);
+        float x2 = x0 + (2 * cast(float)G2 - 1);
+        float y2 = y0 + (2 * cast(float)G2 - 1);
         n2 = (c * c) * (c * c) * _fnlGradCoord2D(seed, i + PRIME_X, j + PRIME_Y, x2, y2);
     }
 
     if (y0 > x0)
     {
-        float x1 = x0 + (float)G2;
-        float y1 = y0 + ((float)G2 - 1);
+        float x1 = x0 + cast(float)G2;
+        float y1 = y0 + (cast(float)G2 - 1);
         float b = 0.5f - x1 * x1 - y1 * y1;
         if (b <= 0)
             n1 = 0;
@@ -953,8 +953,8 @@ static float _fnlSingleSimplex2D(int seed, FNLfloat x, FNLfloat y)
     }
     else
     {
-        float x1 = x0 + ((float)G2 - 1);
-        float y1 = y0 + (float)G2;
+        float x1 = x0 + (cast(float)G2 - 1);
+        float y1 = y0 + cast(float)G2;
         float b = 0.5f - x1 * x1 - y1 * y1;
         if (b <= 0)
             n1 = 0;
@@ -981,13 +981,13 @@ static float _fnlSingleOpenSimplex23D(int seed, FNLfloat x, FNLfloat y, FNLfloat
     int i = _fnlFastRound(x);
     int j = _fnlFastRound(y);
     int k = _fnlFastRound(z);
-    float x0 = (float)(x - i);
-    float y0 = (float)(y - j);
-    float z0 = (float)(z - k);
+    float x0 = cast(float)(x - i);
+    float y0 = cast(float)(y - j);
+    float z0 = cast(float)(z - k);
 
-    int xNSign = (int)(-1.0f - x0) | 1;
-    int yNSign = (int)(-1.0f - y0) | 1;
-    int zNSign = (int)(-1.0f - z0) | 1;
+    int xNSign = cast(int)(-1.0f - x0) | 1;
+    int yNSign = cast(int)(-1.0f - y0) | 1;
+    int zNSign = cast(int)(-1.0f - z0) | 1;
 
     float ax0 = xNSign * -x0;
     float ay0 = yNSign * -y0;
@@ -1071,7 +1071,7 @@ static float _fnlSingleOpenSimplex2S2D(int seed, FNLfloat x, FNLfloat y)
 {
     // 2D OpenSimplex2S case is a modified 2D simplex noise.
 
-    const FNLfloat SQRT3 = (FNLfloat)1.7320508075688772935274463415059;
+    const FNLfloat SQRT3 = cast(FNLfloat)1.7320508075688772935274463415059;
     const FNLfloat G2 = (3 - SQRT3) / 6;
 
     /*
@@ -1083,24 +1083,24 @@ static float _fnlSingleOpenSimplex2S2D(int seed, FNLfloat x, FNLfloat y)
 
     int i = _fnlFastFloor(x);
     int j = _fnlFastFloor(y);
-    float xi = (float)(x - i);
-    float yi = (float)(y - j);
+    float xi = cast(float)(x - i);
+    float yi = cast(float)(y - j);
 
     i *= PRIME_X;
     j *= PRIME_Y;
     int i1 = i + PRIME_X;
     int j1 = j + PRIME_Y;
 
-    float t = (xi + yi) * (float)G2;
+    float t = (xi + yi) * cast(float)G2;
     float x0 = xi - t;
     float y0 = yi - t;
 
     float a0 = (2.0f / 3.0f) - x0 * x0 - y0 * y0;
     float value = (a0 * a0) * (a0 * a0) * _fnlGradCoord2D(seed, i, j, x0, y0);
 
-    float a1 = (float)(2 * (1 - 2 * G2) * (1 / G2 - 2)) * t + ((float)(-2 * (1 - 2 * G2) * (1 - 2 * G2)) + a0);
-    float x1 = x0 - (float)(1 - 2 * G2);
-    float y1 = y0 - (float)(1 - 2 * G2);
+    float a1 = cast(float)(2 * (1 - 2 * G2) * (1 / G2 - 2)) * t + (cast(float)(-2 * (1 - 2 * G2) * (1 - 2 * G2)) + a0);
+    float x1 = x0 - cast(float)(1 - 2 * G2);
+    float y1 = y0 - cast(float)(1 - 2 * G2);
     value += (a1 * a1) * (a1 * a1) * _fnlGradCoord2D(seed, i1, j1, x1, y1);
 
     // Nested conditionals were faster than compact bit logic/arithmetic.
@@ -1109,8 +1109,8 @@ static float _fnlSingleOpenSimplex2S2D(int seed, FNLfloat x, FNLfloat y)
     {
         if (xi + xmyi > 1)
         {
-            float x2 = x0 + (float)(3 * G2 - 2);
-            float y2 = y0 + (float)(3 * G2 - 1);
+            float x2 = x0 + cast(float)(3 * G2 - 2);
+            float y2 = y0 + cast(float)(3 * G2 - 1);
             float a2 = (2.0f / 3.0f) - x2 * x2 - y2 * y2;
             if (a2 > 0)
             {
@@ -1119,8 +1119,8 @@ static float _fnlSingleOpenSimplex2S2D(int seed, FNLfloat x, FNLfloat y)
         }
         else
         {
-            float x2 = x0 + (float)G2;
-            float y2 = y0 + (float)(G2 - 1);
+            float x2 = x0 + cast(float)G2;
+            float y2 = y0 + cast(float)(G2 - 1);
             float a2 = (2.0f / 3.0f) - x2 * x2 - y2 * y2;
             if (a2 > 0)
             {
@@ -1130,8 +1130,8 @@ static float _fnlSingleOpenSimplex2S2D(int seed, FNLfloat x, FNLfloat y)
 
         if (yi - xmyi > 1)
         {
-            float x3 = x0 + (float)(3 * G2 - 1);
-            float y3 = y0 + (float)(3 * G2 - 2);
+            float x3 = x0 + cast(float)(3 * G2 - 1);
+            float y3 = y0 + cast(float)(3 * G2 - 2);
             float a3 = (2.0f / 3.0f) - x3 * x3 - y3 * y3;
             if (a3 > 0)
             {
@@ -1140,8 +1140,8 @@ static float _fnlSingleOpenSimplex2S2D(int seed, FNLfloat x, FNLfloat y)
         }
         else
         {
-            float x3 = x0 + (float)(G2 - 1);
-            float y3 = y0 + (float)G2;
+            float x3 = x0 + cast(float)(G2 - 1);
+            float y3 = y0 + cast(float)G2;
             float a3 = (2.0f / 3.0f) - x3 * x3 - y3 * y3;
             if (a3 > 0)
             {
@@ -1153,8 +1153,8 @@ static float _fnlSingleOpenSimplex2S2D(int seed, FNLfloat x, FNLfloat y)
     {
         if (xi + xmyi < 0)
         {
-            float x2 = x0 + (float)(1 - G2);
-            float y2 = y0 - (float)G2;
+            float x2 = x0 + cast(float)(1 - G2);
+            float y2 = y0 - cast(float)G2;
             float a2 = (2.0f / 3.0f) - x2 * x2 - y2 * y2;
             if (a2 > 0)
             {
@@ -1163,8 +1163,8 @@ static float _fnlSingleOpenSimplex2S2D(int seed, FNLfloat x, FNLfloat y)
         }
         else
         {
-            float x2 = x0 + (float)(G2 - 1);
-            float y2 = y0 + (float)G2;
+            float x2 = x0 + cast(float)(G2 - 1);
+            float y2 = y0 + cast(float)G2;
             float a2 = (2.0f / 3.0f) - x2 * x2 - y2 * y2;
             if (a2 > 0)
             {
@@ -1174,8 +1174,8 @@ static float _fnlSingleOpenSimplex2S2D(int seed, FNLfloat x, FNLfloat y)
 
         if (yi < xmyi)
         {
-            float x2 = x0 - (float)G2;
-            float y2 = y0 - (float)(G2 - 1);
+            float x2 = x0 - cast(float)G2;
+            float y2 = y0 - cast(float)(G2 - 1);
             float a2 = (2.0f / 3.0f) - x2 * x2 - y2 * y2;
             if (a2 > 0)
             {
@@ -1184,8 +1184,8 @@ static float _fnlSingleOpenSimplex2S2D(int seed, FNLfloat x, FNLfloat y)
         }
         else
         {
-            float x2 = x0 + (float)G2;
-            float y2 = y0 + (float)(G2 - 1);
+            float x2 = x0 + cast(float)G2;
+            float y2 = y0 + cast(float)(G2 - 1);
             float a2 = (2.0f / 3.0f) - x2 * x2 - y2 * y2;
             if (a2 > 0)
             {
@@ -1211,18 +1211,18 @@ static float _fnlSingleOpenSimplex2S3D(int seed, FNLfloat x, FNLfloat y, FNLfloa
     int i = _fnlFastFloor(x);
     int j = _fnlFastFloor(y);
     int k = _fnlFastFloor(z);
-    float xi = (float)(x - i);
-    float yi = (float)(y - j);
-    float zi = (float)(z - k);
+    float xi = cast(float)(x - i);
+    float yi = cast(float)(y - j);
+    float zi = cast(float)(z - k);
 
     i *= PRIME_X;
     j *= PRIME_Y;
     k *= PRIME_Z;
     int seed2 = seed + 1293373;
 
-    int xNMask = (int)(-0.5f - xi);
-    int yNMask = (int)(-0.5f - yi);
-    int zNMask = (int)(-0.5f - zi);
+    int xNMask = cast(int)(-0.5f - xi);
+    int yNMask = cast(int)(-0.5f - yi);
+    int zNMask = cast(int)(-0.5f - zi);
 
     float x0 = xi + xNMask;
     float y0 = yi + yNMask;
@@ -1419,8 +1419,8 @@ static float _fnlSingleCellular2D(fnl_state *state, int seed, FNLfloat x, FNLflo
                 int hash = _fnlHash2D(seed, xPrimed, yPrimed);
                 int idx = hash & (255 << 1);
 
-                float vecX = (float)(xi - x) + RAND_VECS_2D[idx] * cellularJitter;
-                float vecY = (float)(yi - y) + RAND_VECS_2D[idx | 1] * cellularJitter;
+                float vecX = cast(float)(xi - x) + RAND_VECS_2D[idx] * cellularJitter;
+                float vecY = cast(float)(yi - y) + RAND_VECS_2D[idx | 1] * cellularJitter;
 
                 float newDistance = vecX * vecX + vecY * vecY;
 
@@ -1445,8 +1445,8 @@ static float _fnlSingleCellular2D(fnl_state *state, int seed, FNLfloat x, FNLflo
                 int hash = _fnlHash2D(seed, xPrimed, yPrimed);
                 int idx = hash & (255 << 1);
 
-                float vecX = (float)(xi - x) + RAND_VECS_2D[idx] * cellularJitter;
-                float vecY = (float)(yi - y) + RAND_VECS_2D[idx | 1] * cellularJitter;
+                float vecX = cast(float)(xi - x) + RAND_VECS_2D[idx] * cellularJitter;
+                float vecY = cast(float)(yi - y) + RAND_VECS_2D[idx | 1] * cellularJitter;
 
                 float newDistance = _fnlFastAbs(vecX) + _fnlFastAbs(vecY);
 
@@ -1470,8 +1470,8 @@ static float _fnlSingleCellular2D(fnl_state *state, int seed, FNLfloat x, FNLflo
                 int hash = _fnlHash2D(seed, xPrimed, yPrimed);
                 int idx = hash & (255 << 1);
 
-                float vecX = (float)(xi - x) + RAND_VECS_2D[idx] * cellularJitter;
-                float vecY = (float)(yi - y) + RAND_VECS_2D[idx | 1] * cellularJitter;
+                float vecX = cast(float)(xi - x) + RAND_VECS_2D[idx] * cellularJitter;
+                float vecY = cast(float)(yi - y) + RAND_VECS_2D[idx | 1] * cellularJitter;
 
                 float newDistance = (_fnlFastAbs(vecX) + _fnlFastAbs(vecY)) + (vecX * vecX + vecY * vecY);
 
@@ -1550,9 +1550,9 @@ static float _fnlSingleCellular3D(fnl_state *state, int seed, FNLfloat x, FNLflo
                     int hash = _fnlHash3D(seed, xPrimed, yPrimed, zPrimed);
                     int idx = hash & (255 << 2);
 
-                    float vecX = (float)(xi - x) + RAND_VECS_3D[idx] * cellularJitter;
-                    float vecY = (float)(yi - y) + RAND_VECS_3D[idx | 1] * cellularJitter;
-                    float vecZ = (float)(zi - z) + RAND_VECS_3D[idx | 2] * cellularJitter;
+                    float vecX = cast(float)(xi - x) + RAND_VECS_3D[idx] * cellularJitter;
+                    float vecY = cast(float)(yi - y) + RAND_VECS_3D[idx | 1] * cellularJitter;
+                    float vecZ = cast(float)(zi - z) + RAND_VECS_3D[idx | 2] * cellularJitter;
 
                     float newDistance = vecX * vecX + vecY * vecY + vecZ * vecZ;
 
@@ -1583,9 +1583,9 @@ static float _fnlSingleCellular3D(fnl_state *state, int seed, FNLfloat x, FNLflo
                     int hash = _fnlHash3D(seed, xPrimed, yPrimed, zPrimed);
                     int idx = hash & (255 << 2);
 
-                    float vecX = (float)(xi - x) + RAND_VECS_3D[idx] * cellularJitter;
-                    float vecY = (float)(yi - y) + RAND_VECS_3D[idx | 1] * cellularJitter;
-                    float vecZ = (float)(zi - z) + RAND_VECS_3D[idx | 2] * cellularJitter;
+                    float vecX = cast(float)(xi - x) + RAND_VECS_3D[idx] * cellularJitter;
+                    float vecY = cast(float)(yi - y) + RAND_VECS_3D[idx | 1] * cellularJitter;
+                    float vecZ = cast(float)(zi - z) + RAND_VECS_3D[idx | 2] * cellularJitter;
 
                     float newDistance = _fnlFastAbs(vecX) + _fnlFastAbs(vecY) + _fnlFastAbs(vecZ);
 
@@ -1616,9 +1616,9 @@ static float _fnlSingleCellular3D(fnl_state *state, int seed, FNLfloat x, FNLflo
                     int hash = _fnlHash3D(seed, xPrimed, yPrimed, zPrimed);
                     int idx = hash & (255 << 2);
 
-                    float vecX = (float)(xi - x) + RAND_VECS_3D[idx] * cellularJitter;
-                    float vecY = (float)(yi - y) + RAND_VECS_3D[idx | 1] * cellularJitter;
-                    float vecZ = (float)(zi - z) + RAND_VECS_3D[idx | 2] * cellularJitter;
+                    float vecX = cast(float)(xi - x) + RAND_VECS_3D[idx] * cellularJitter;
+                    float vecY = cast(float)(yi - y) + RAND_VECS_3D[idx | 1] * cellularJitter;
+                    float vecZ = cast(float)(zi - z) + RAND_VECS_3D[idx | 2] * cellularJitter;
 
                     float newDistance = (_fnlFastAbs(vecX) + _fnlFastAbs(vecY) + _fnlFastAbs(vecZ)) + (vecX * vecX + vecY * vecY + vecZ * vecZ);
 
@@ -1672,8 +1672,8 @@ static float _fnlSinglePerlin2D(int seed, FNLfloat x, FNLfloat y)
     int x0 = _fnlFastFloor(x);
     int y0 = _fnlFastFloor(y);
 
-    float xd0 = (float)(x - x0);
-    float yd0 = (float)(y - y0);
+    float xd0 = cast(float)(x - x0);
+    float yd0 = cast(float)(y - y0);
     float xd1 = xd0 - 1;
     float yd1 = yd0 - 1;
 
@@ -1697,9 +1697,9 @@ static float _fnlSinglePerlin3D(int seed, FNLfloat x, FNLfloat y, FNLfloat z)
     int y0 = _fnlFastFloor(y);
     int z0 = _fnlFastFloor(z);
 
-    float xd0 = (float)(x - x0);
-    float yd0 = (float)(y - y0);
-    float zd0 = (float)(z - z0);
+    float xd0 = cast(float)(x - x0);
+    float yd0 = cast(float)(y - y0);
+    float zd0 = cast(float)(z - z0);
     float xd1 = xd0 - 1;
     float yd1 = yd0 - 1;
     float zd1 = zd0 - 1;
@@ -1743,8 +1743,8 @@ static float _fnlSingleValueCubic2D(int seed, FNLfloat x, FNLfloat y)
     int y0 = y1 - PRIME_Y;
     int x2 = x1 + PRIME_X;
     int y2 = y1 + PRIME_Y;
-    int x3 = x1 + (int)((long)PRIME_X << 1);
-    int y3 = y1 + (int)((long)PRIME_Y << 1);
+    int x3 = x1 + cast(int)(cast(long)PRIME_X << 1);
+    int y3 = y1 + cast(int)(cast(long)PRIME_Y << 1);
 
     return _fnlCubicLerp(
         _fnlCubicLerp(_fnlValCoord2D(seed, x0, y0), _fnlValCoord2D(seed, x1, y0), _fnlValCoord2D(seed, x2, y0), _fnlValCoord2D(seed, x3, y0),
@@ -1764,9 +1764,9 @@ static float _fnlSingleValueCubic3D(int seed, FNLfloat x, FNLfloat y, FNLfloat z
     int y1 = _fnlFastFloor(y);
     int z1 = _fnlFastFloor(z);
 
-    float xs = x - (float)x1;
-    float ys = y - (float)y1;
-    float zs = z - (float)z1;
+    float xs = x - cast(float)x1;
+    float ys = y - cast(float)y1;
+    float zs = z - cast(float)z1;
 
     x1 *= PRIME_X;
     y1 *= PRIME_Y;
@@ -1778,9 +1778,9 @@ static float _fnlSingleValueCubic3D(int seed, FNLfloat x, FNLfloat y, FNLfloat z
     int x2 = x1 + PRIME_X;
     int y2 = y1 + PRIME_Y;
     int z2 = z1 + PRIME_Z;
-    int x3 = x1 + (int)((long)PRIME_X << 1);
-    int y3 = y1 + (int)((long)PRIME_Y << 1);
-    int z3 = z1 + (int)((long)PRIME_Z << 1);   
+    int x3 = x1 + cast(int)(cast(long)PRIME_X << 1);
+    int y3 = y1 + cast(int)(cast(long)PRIME_Y << 1);
+    int z3 = z1 + cast(int)(cast(long)PRIME_Z << 1);   
 
     return _fnlCubicLerp(
         _fnlCubicLerp(
@@ -1817,8 +1817,8 @@ static float _fnlSingleValue2D(int seed, FNLfloat x, FNLfloat y)
     int x0 = _fnlFastFloor(x);
     int y0 = _fnlFastFloor(y);
 
-    float xs = _fnlInterpHermite((float)(x - x0));
-    float ys = _fnlInterpHermite((float)(y - y0));
+    float xs = _fnlInterpHermite(cast(float)(x - x0));
+    float ys = _fnlInterpHermite(cast(float)(y - y0));
 
     x0 *= PRIME_X;
     y0 *= PRIME_Y;
@@ -1837,9 +1837,9 @@ static float _fnlSingleValue3D(int seed, FNLfloat x, FNLfloat y, FNLfloat z)
     int y0 = _fnlFastFloor(y);
     int z0 = _fnlFastFloor(z);
 
-    float xs = _fnlInterpHermite((float)(x - x0));
-    float ys = _fnlInterpHermite((float)(y - y0));
-    float zs = _fnlInterpHermite((float)(z - z0));
+    float xs = _fnlInterpHermite(cast(float)(x - x0));
+    float ys = _fnlInterpHermite(cast(float)(y - y0));
+    float zs = _fnlInterpHermite(cast(float)(z - z0));
 
     x0 *= PRIME_X;
     y0 *= PRIME_Y;
@@ -1867,7 +1867,7 @@ static void _fnlSingleDomainWarpBasicGrid3D(int seed, float warpAmp, float frequ
 static void _fnlSingleDomainWarpSimplexGradient(int seed, float warpAmp, float frequency, FNLfloat x, FNLfloat y, FNLfloat *xr, FNLfloat *yr, bool outGradOnly);
 static void _fnlSingleDomainWarpOpenSimplex2Gradient(int seed, float warpAmp, float frequency, FNLfloat x, FNLfloat y, FNLfloat z, FNLfloat *xr, FNLfloat *yr, FNLfloat *zr, bool outGradOnly);
 
-static inline void _fnlDoSingleDomainWarp2D(fnl_state *state, int seed, float amp, float freq, FNLfloat x, FNLfloat y, FNLfloat *xp, FNLfloat *yp)
+static pragma void _fnlDoSingleDomainWarp2D(fnl_state *state, int seed, float amp, float freq, FNLfloat x, FNLfloat y, FNLfloat *xp, FNLfloat *yp)
 {
     switch (state.domain_warp_type)
     {
