@@ -13,3 +13,4 @@ fast_noise-test-*
 *.o
 *.obj
 *.lst
+*.pdb
