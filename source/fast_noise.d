@@ -50,8 +50,6 @@ module fast_noise;
 // VERSION: 1.0.1
 // https://github.com/Auburn/FastNoise
 
-// In *one* C or C++ file, use #define FNL_IMPL to generate implementation
-
 
 // Switch between using floats or doubles for input position
 alias FNLfloat = float;
