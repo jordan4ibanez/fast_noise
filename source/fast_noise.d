@@ -1733,8 +1733,8 @@ static float _fnlSingleValueCubic2D(int seed, FNLfloat x, FNLfloat y)
     int x1 = _fnlFastFloor(x);
     int y1 = _fnlFastFloor(y);
 
-    float xs = x - (float)x1;
-    float ys = y - (float)y1;
+    float xs = x - cast(float)x1;
+    float ys = y - cast(float)y1;
 
     x1 *= PRIME_X;
     y1 *= PRIME_Y;
@@ -1867,7 +1867,7 @@ static void _fnlSingleDomainWarpBasicGrid3D(int seed, float warpAmp, float frequ
 static void _fnlSingleDomainWarpSimplexGradient(int seed, float warpAmp, float frequency, FNLfloat x, FNLfloat y, FNLfloat *xr, FNLfloat *yr, bool outGradOnly);
 static void _fnlSingleDomainWarpOpenSimplex2Gradient(int seed, float warpAmp, float frequency, FNLfloat x, FNLfloat y, FNLfloat z, FNLfloat *xr, FNLfloat *yr, FNLfloat *zr, bool outGradOnly);
 
-static pragma void _fnlDoSingleDomainWarp2D(fnl_state *state, int seed, float amp, float freq, FNLfloat x, FNLfloat y, FNLfloat *xp, FNLfloat *yp)
+static pragma(inline) void _fnlDoSingleDomainWarp2D(fnl_state *state, int seed, float amp, float freq, FNLfloat x, FNLfloat y, FNLfloat *xp, FNLfloat *yp)
 {
     switch (state.domain_warp_type)
     {
@@ -1883,7 +1883,7 @@ static pragma void _fnlDoSingleDomainWarp2D(fnl_state *state, int seed, float am
     }
 }
 
-static inline void _fnlDoSingleDomainWarp3D(fnl_state *state, int seed, float amp, float freq, FNLfloat x, FNLfloat y, FNLfloat z, FNLfloat *xp, FNLfloat *yp, FNLfloat *zp)
+static pragma(inline) void _fnlDoSingleDomainWarp3D(fnl_state *state, int seed, float amp, float freq, FNLfloat x, FNLfloat y, FNLfloat z, FNLfloat *xp, FNLfloat *yp, FNLfloat *zp)
 {
     switch (state.domain_warp_type)
     {
@@ -2024,8 +2024,8 @@ static void _fnlSingleDomainWarpBasicGrid2D(int seed, float warpAmp, float frequ
     int x0 = _fnlFastFloor(xf);
     int y0 = _fnlFastFloor(yf);
 
-    float xs = _fnlInterpHermite((float)(xf - x0));
-    float ys = _fnlInterpHermite((float)(yf - y0));
+    float xs = _fnlInterpHermite(cast(float)(xf - x0));
+    float ys = _fnlInterpHermite(cast(float)(yf - y0));
 
     x0 *= PRIME_X;
     y0 *= PRIME_Y;
@@ -2058,9 +2058,9 @@ static void _fnlSingleDomainWarpBasicGrid3D(int seed, float warpAmp, float frequ
     int y0 = _fnlFastFloor(yf);
     int z0 = _fnlFastFloor(zf);
 
-    float xs = _fnlInterpHermite((float)(xf - x0));
-    float ys = _fnlInterpHermite((float)(yf - y0));
-    float zs = _fnlInterpHermite((float)(zf - z0));
+    float xs = _fnlInterpHermite(cast(float)(xf - x0));
+    float ys = _fnlInterpHermite(cast(float)(yf - y0));
+    float zs = _fnlInterpHermite(cast(float)(zf - z0));
 
     x0 *= PRIME_X;
     y0 *= PRIME_Y;
@@ -2125,12 +2125,12 @@ static void _fnlSingleDomainWarpSimplexGradient(int seed, float warpAmp, float f
 
     int i = _fnlFastFloor(x);
     int j = _fnlFastFloor(y);
-    float xi = (float)(x - i);
-    float yi = (float)(y - j);
+    float xi = cast(float)(x - i);
+    float yi = cast(float)(y - j);
 
     float t = (xi + yi) * G2;
-    float x0 = (float)(xi - t);
-    float y0 = (float)(yi - t);
+    float x0 = cast(float)(xi - t);
+    float y0 = cast(float)(yi - t);
 
     i *= PRIME_X;
     j *= PRIME_Y;
@@ -2151,11 +2151,11 @@ static void _fnlSingleDomainWarpSimplexGradient(int seed, float warpAmp, float f
         vy += aaaa * yo;
     }
 
-    float c = (float)(2 * (1 - 2 * G2) * (1 / G2 - 2)) * t + ((float)(-2 * (1 - 2 * G2) * (1 - 2 * G2)) + a);
+    float c = cast(float)(2 * (1 - 2 * G2) * (1 / G2 - 2)) * t + (cast(float)(-2 * (1 - 2 * G2) * (1 - 2 * G2)) + a);
     if (c > 0)
     {
-        float x2 = x0 + (2 * (float)G2 - 1);
-        float y2 = y0 + (2 * (float)G2 - 1);
+        float x2 = x0 + (2 * cast(float)G2 - 1);
+        float y2 = y0 + (2 * cast(float)G2 - 1);
         float cccc = (c * c) * (c * c);
         float xo, yo;
         if (outGradOnly)
@@ -2168,8 +2168,8 @@ static void _fnlSingleDomainWarpSimplexGradient(int seed, float warpAmp, float f
 
     if (y0 > x0)
     {
-        float x1 = x0 + (float)G2;
-        float y1 = y0 + ((float)G2 - 1);
+        float x1 = x0 + cast(float)G2;
+        float y1 = y0 + (cast(float)G2 - 1);
         float b = 0.5f - x1 * x1 - y1 * y1;
         if (b > 0)
         {
@@ -2185,8 +2185,8 @@ static void _fnlSingleDomainWarpSimplexGradient(int seed, float warpAmp, float f
     }
     else
     {
-        float x1 = x0 + ((float)G2 - 1);
-        float y1 = y0 + (float)G2;
+        float x1 = x0 + (cast(float)G2 - 1);
+        float y1 = y0 + cast(float)G2;
         float b = 0.5f - x1 * x1 - y1 * y1;
         if (b > 0)
         {
@@ -2221,13 +2221,13 @@ static void _fnlSingleDomainWarpOpenSimplex2Gradient(int seed, float warpAmp, fl
     int i = _fnlFastRound(x);
     int j = _fnlFastRound(y);
     int k = _fnlFastRound(z);
-    float x0 = (float)x - i;
-    float y0 = (float)y - j;
-    float z0 = (float)z - k;
+    float x0 = cast(float)x - i;
+    float y0 = cast(float)y - j;
+    float z0 = cast(float)z - k;
 
-    int xNSign = (int)(-x0 - 1.0f) | 1;
-    int yNSign = (int)(-y0 - 1.0f) | 1;
-    int zNSign = (int)(-z0 - 1.0f) | 1;
+    int xNSign = cast(int)(-x0 - 1.0f) | 1;
+    int yNSign = cast(int)(-y0 - 1.0f) | 1;
+    int zNSign = cast(int)(-z0 - 1.0f) | 1;
 
     float ax0 = xNSign * -x0;
     float ay0 = yNSign * -y0;
@@ -2415,11 +2415,3 @@ void fnlDomainWarp3D(fnl_state *state, FNLfloat *x, FNLfloat *y, FNLfloat *z)
         break;
     }
 }
-
-#endif // FNL_IMPL
-
-#if defined(__cplusplus)
-}
-#endif
-
-#endif // FASTNOISELITE_H
