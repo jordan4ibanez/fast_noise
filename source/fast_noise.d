@@ -52,8 +52,8 @@ module fast_noise;
 
 
 // Switch between using floats or doubles for input position
-alias FNLfloat = float;
-//alias FNLfloat = double;
+// alias FNLfloat = float;
+alias FNLfloat = double;
 
 // Enums
 enum FNLNoiseType {
