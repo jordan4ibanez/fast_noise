@@ -22,8 +22,8 @@ void main() {
     noise.seed = unpredictableSeed();
     noise.noise_type = FNLNoiseType.FNL_NOISE_PERLIN;
     writeln("Begin perlin noise:");
-    for (float i = 0; i < 100; i++) {
-        float test = fnlGetNoise3D(&noise, 0,i,0);
+    for (double i = 0; i < 100; i++) {
+        double test = fnlGetNoise3D(&noise, 0,i,0);
         writeln("noise: ", test);
     }
 
@@ -31,8 +31,8 @@ void main() {
     FNLState moreNoise = fnlCreateState(unpredictableSeed());
     moreNoise.noise_type = FNLNoiseType.FNL_NOISE_OPENSIMPLEX2;
     writeln("Begin OpenSimplex2 noise:");
-    for (float i = 0; i < 100; i++) {
-        float test = fnlGetNoise3D(&moreNoise, 0,i,0);
+    for (double i = 0; i < 100; i++) {
+        double test = fnlGetNoise3D(&moreNoise, 0,i,0);
         writeln("noise: ", test);
     }
 
